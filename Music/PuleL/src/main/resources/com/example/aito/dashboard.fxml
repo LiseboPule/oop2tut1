@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.aito.DashboardController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #4A90E2; -fx-padding: 10px;">
+            <Text text="Vehicle Rental System" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: white;" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Label fx:id="welcomeLabel" text="Welcome, User" style="-fx-text-fill: white;"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="primary-button" style="-fx-background-color: #E94E77; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #F7F7F7; -fx-padding: 15px; -fx-min-width: 200px;">
+            <Button text="Dashboard" maxWidth="Infinity" styleClass="primary-button" onAction="#navigateToDashboard"/>
+            <Button text="Vehicles" maxWidth="Infinity" styleClass="primary-button" onAction="#navigateToVehicles"/>
+            <Button text="Bookings" maxWidth="Infinity" styleClass="primary-button" onAction="#navigateToBookings"/>
+            <Button text="Customers" maxWidth="Infinity" styleClass="primary-button" onAction="#navigateToCustomers"/>
+            <Button text="Reports" maxWidth="Infinity" styleClass="primary-button" onAction="#navigateToReports"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox spacing="20" style="-fx-padding: 20px;">
+                <Text text="Dashboard" style="-fx-font-size: 28; -fx-font-weight: bold;"/>
+
+                <Text text="Summary" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+
+                <HBox spacing="20" alignment="CENTER_LEFT">
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Total Vehicles" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="vehiclesCountLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Available" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="availableCountLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Booked" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="bookedCountLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Maintenance" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="maintenanceCountLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                </HBox>
+
+                <Text text="Bookings" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+
+                <HBox spacing="20" alignment="CENTER_LEFT">
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Total Bookings" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="totalBookingsLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Pending" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="pendingBookingsLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Active" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="activeBookingsLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5" minWidth="150" minHeight="100" style="-fx-background-color: #D9E3F0; -fx-padding: 10px; -fx-border-radius: 5;">
+                        <Label text="Completed" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="completedBookingsLabel" text="0" style="-fx-font-size: 20;"/>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="20" alignment="CENTER">
+                    <VBox style="-fx-background-color: #F7F7F7; -fx-padding: 15px; -fx-border-radius: 5;">
+                        <Label text="Vehicle Status" style="-fx-font-weight: bold;"/>
+                        <PieChart fx:id="vehicleStatusChart"/>
+                    </VBox>
+
+                    <VBox style="-fx-background-color: #F7F7F7; -fx-padding: 15px; -fx-border-radius: 5;">
+                        <Label text="Bookings by Status" style="-fx-font-weight: bold;"/>
+                        <BarChart fx:id="bookingStatusChart">
+                            <xAxis>
+                                <CategoryAxis fx:id="statusAxis" label="Status"/>
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="countAxis" label="Count"/>
+                            </yAxis>
+                        </BarChart>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
